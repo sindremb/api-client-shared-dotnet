@@ -3,9 +3,11 @@ language: csharp
 solution: api-client-shared.sln
 mono: none
 git:
-    submodules: false
+  submodules: false
 dotnet: 2.0.0
-before_install: 
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive 
   - ./travis-deploy/submodule-init.sh
   - ./travis-deploy/apt-get-add-keys-and-update.sh
   - ./travis-deploy/mono-install.sh
